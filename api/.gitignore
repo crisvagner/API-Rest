@@ -1,0 +1,14 @@
+# dependencies
+/venv
+
+# testing
+/test
+
+# production
+/build
+
+# misc
+.env.local
+.env.test.local
+.env.development.local
+.env.production.local
