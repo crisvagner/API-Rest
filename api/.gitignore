@@ -1,6 +1,9 @@
 # dependencies
 /venv
 
+# cache
+__pycache__/
+
 # testing
 /test
 

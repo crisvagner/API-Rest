@@ -1,10 +1,5 @@
-from src.controllers.UserController import *
-from src.controllers.PostController import *
-from server.instance import server
-from db.services import db, ma
-
-
-app = server.app
+from src.controllers.Users import *
+from src.controllers.Posts import *
 
 
 @app.before_first_request
@@ -18,6 +13,8 @@ def index():
 
 
 if __name__ == '__main__':
-    db.init_app(app)
-    ma.init_app(app)
-    server.run()
+    app.run(
+        port=5000,
+        debug=True,
+        host='0.0.0.0'
+    )
