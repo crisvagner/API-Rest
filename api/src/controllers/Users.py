@@ -1,5 +1,9 @@
-from flask import request, jsonify
+from datetime import datetime, timedelta
+from flask import request, jsonify, current_app
+from auth import jwt_required
 from server import app, db
+
+import jwt
 
 from src.schemas import UserSchema
 from src.models import Users, Posts
@@ -8,7 +12,7 @@ user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
 
-@app.route('/users', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def create_user():
     try:
         email = request.json['email']
@@ -38,7 +42,8 @@ def get_user(id):
 
 
 @app.route('/users', methods=['GET'])
-def get_all_users():
+@jwt_required
+def get_all_users(current_user):
     try:
         users = Users.query.all()
         users_dict = users_schema.dump(users)
@@ -82,3 +87,23 @@ def delete_user(id):
 
     except Exception as error:
         return jsonify({'message': error}), 500
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.json['email']
+    pwd = request.json['password']
+
+    user = Users.query.filter_by(email=email).first()
+
+    if not user or not user.check_password(pwd):
+        return jsonify({'error': 'As suas credênciais estão erradas!'}), 403
+
+    payload = {
+        "id": user.id,
+        "exp": datetime.utcnow() + timedelta(minutes=10)
+    }
+
+    token = jwt.encode(payload, app.config['SECRET_KEY'])
+
+    return jsonify({"token": token})
