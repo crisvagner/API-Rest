@@ -1,16 +1,14 @@
-## API REST
+# API REST
 
-### Sobre o projeto
+## Sobre o projeto
 
-O projeto é um sistema de registro e login, com acesso a uma pagina onde o usuário teria um sistema de crud. A API Rest foi desenvolvida com Python e Flask e o Front End ainda não finalizei mas a ideia seria desenvolve-lo com React e fazer a integração com a API em Flask.
+O projeto é uma API Rest desenvolvida com Python e Flask onde é possível fazer um CRUD tanto de usuários como de postagens.
 
-### Objetivo
+## Objetivo
 
-Aprender sobre React, Flask e integração entre o Back-End e o Fron-End.
+Aprender sobre o desenvolvimento de APIs com Flask.
 
-### Observações
-
-Apenas a API esta funcionando embora não esteja finalizada, o fron-end do projeto não foi finalizado.
+## Instruções
 
 Para rodar o servidor da API Rest, digite os seguintes comandos:
 
